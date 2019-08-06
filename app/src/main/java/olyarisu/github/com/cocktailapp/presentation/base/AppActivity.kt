@@ -1,10 +1,10 @@
 package olyarisu.github.com.cocktailapp.presentation.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatActivity
 import olyarisu.github.com.cocktailapp.R
 
-class AppActivity : AppCompatActivity() {
+class AppActivity : MvpAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

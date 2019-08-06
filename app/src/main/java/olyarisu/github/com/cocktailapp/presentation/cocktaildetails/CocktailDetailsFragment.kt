@@ -1,4 +1,4 @@
-package olyarisu.github.com.cocktailapp.presentation
+package olyarisu.github.com.cocktailapp.presentation.cocktaildetails
 
 import android.content.Context
 import android.os.Bundle
@@ -13,9 +13,13 @@ import olyarisu.github.com.cocktailapp.presentation.adapter.FavouritesCocktailsA
 import olyarisu.github.com.cocktailapp.presentation.adapter.IngredientsAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.arellomobile.mvp.presenter.InjectPresenter
 
 
 class CocktailDetailsFragment : BaseFragment() {
+
+    @InjectPresenter
+    lateinit var presenter: CocktailDetailsPresenter
 
     override val layoutRes = R.layout.fragment_cocktail_details
 

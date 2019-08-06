@@ -1,4 +1,4 @@
-package olyarisu.github.com.cocktailapp.presentation
+package olyarisu.github.com.cocktailapp.presentation.home
 
 import android.content.Context
 import android.os.Bundle
@@ -10,9 +10,13 @@ import olyarisu.github.com.cocktailapp.R
 import olyarisu.github.com.cocktailapp.presentation.adapter.CategoriesAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.arellomobile.mvp.presenter.InjectPresenter
 
 
 class HomeFragment : BaseFragment() {
+
+    @InjectPresenter
+    lateinit var presenter: HomePresenter
 
     override val layoutRes = R.layout.fragment_home
 

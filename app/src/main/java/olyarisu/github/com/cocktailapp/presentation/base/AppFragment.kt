@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_app.*
 import olyarisu.github.com.cocktailapp.R
-import olyarisu.github.com.cocktailapp.presentation.CocktailDetailsFragment
-import olyarisu.github.com.cocktailapp.presentation.FavouriteCocktalsFragment
-import olyarisu.github.com.cocktailapp.presentation.HomeFragment
+import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
+import olyarisu.github.com.cocktailapp.presentation.favouritelist.FavouriteCocktalsFragment
+import olyarisu.github.com.cocktailapp.presentation.home.HomeFragment
 
 
 class AppFragment : BaseFragment() {
@@ -17,7 +17,9 @@ class AppFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val transaction = childFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, HomeFragment()).commit()
+        transaction.replace(R.id.fragment_container,
+            HomeFragment()
+        ).commit()
 
         initBottomBar()
     }

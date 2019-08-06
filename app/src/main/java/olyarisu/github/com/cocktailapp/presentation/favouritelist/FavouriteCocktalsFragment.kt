@@ -1,11 +1,11 @@
-package olyarisu.github.com.cocktailapp.presentation
+package olyarisu.github.com.cocktailapp.presentation.favouritelist
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import olyarisu.github.com.cocktailapp.R
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
@@ -13,6 +13,9 @@ import olyarisu.github.com.cocktailapp.presentation.adapter.FavouritesCocktailsA
 
 
 class FavouriteCocktalsFragment : BaseFragment() {
+
+    @InjectPresenter
+    lateinit var presenter: FavouriteCocktalsPresenter
 
     override val layoutRes = R.layout.fragment_favourites
 
