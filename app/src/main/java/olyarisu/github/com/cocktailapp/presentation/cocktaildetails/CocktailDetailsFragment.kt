@@ -7,16 +7,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_cocktail_details.*
 import olyarisu.github.com.cocktailapp.R
-import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.domain.entities.Ingredient
-import olyarisu.github.com.cocktailapp.presentation.adapter.FavouritesCocktailsAdapter
 import olyarisu.github.com.cocktailapp.presentation.adapter.IngredientsAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
+import org.koin.android.ext.android.get
 
 
-class CocktailDetailsFragment : BaseFragment() {
+
+class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
 
     @InjectPresenter
     lateinit var presenter: CocktailDetailsPresenter
@@ -26,35 +28,55 @@ class CocktailDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView()
+        initResyclerView()
     }
 
-    private fun initRecyclerView() {
+    private fun initResyclerView(){
         list_ingredients.layoutManager = LinearLayoutManager(activity as Context)
-
-        val listIngredients = ArrayList<Ingredient>()
-        for (i in 1..5) {
-            listIngredients.add(
-                Ingredient(
-                    id = 1,
-                    name = "name $i",
-                    description = ""
-                )
-            )
-        }
-
-        val listMeasures = ArrayList<String>()
-        for (i in 1..5) {
-            listMeasures.add("$i oz")
-        }
-
-        list_ingredients.adapter =
-            IngredientsAdapter(listIngredients, listMeasures, activity as Context)
         list_ingredients.addItemDecoration(
             DividerItemDecoration(
                 activity as Context,
                 DividerItemDecoration.VERTICAL
             )
         )
+    }
+
+    override fun setName(name: String) {
+        title_cocktail.text = name
+    }
+
+    override fun setInstruction(instruction: String?) {
+        description_cocktail.text = instruction
+    }
+    override fun setCategory(category: String) {
+        category_cocktail.text = category
+    }
+
+    override fun setIngredients(ingredients: List<Ingredient>?) {
+        list_ingredients.adapter =
+            IngredientsAdapter(ingredients, activity as Context)
+    }
+
+    override fun setPhoto(photoURL: String?) {
+        Glide.with(this)
+            .load(photoURL)
+            .into(image_cocktail)
+    }
+
+    override fun showContainer() {
+        container.visibility = View.VISIBLE
+    }
+
+    override fun showProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progress_bar.visibility = View.GONE
+    }
+
+    @ProvidePresenter
+    fun providePresenter(): CocktailDetailsPresenter {
+        return get()
     }
 }

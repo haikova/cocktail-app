@@ -12,7 +12,7 @@ import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.presentation.adapter.FavouritesCocktailsAdapter
 
 
-class FavouriteCocktalsFragment : BaseFragment() {
+class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
 
     @InjectPresenter
     lateinit var presenter: FavouriteCocktalsPresenter
@@ -35,7 +35,6 @@ class FavouriteCocktalsFragment : BaseFragment() {
                 name = "name $i",
                 instruction = null,
                 ingredients = null,
-                ingredientsMeasures = null,
                 alcoholic = "alcoholic",
                 category = "category",
                 glass = "glass"

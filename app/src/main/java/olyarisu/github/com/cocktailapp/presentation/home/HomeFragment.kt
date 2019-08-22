@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.arellomobile.mvp.presenter.InjectPresenter
 
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), HomeView {
 
     @InjectPresenter
     lateinit var presenter: HomePresenter
