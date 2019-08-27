@@ -11,6 +11,8 @@ import olyarisu.github.com.cocktailapp.presentation.adapter.CategoriesAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.arellomobile.mvp.presenter.InjectPresenter
+import olyarisu.github.com.cocktailapp.presentation.base.AppFragment
+import olyarisu.github.com.cocktailapp.presentation.search.SearchResultFragment
 
 
 class HomeFragment : BaseFragment(), HomeView {
@@ -24,6 +26,9 @@ class HomeFragment : BaseFragment(), HomeView {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        //TODO fix this
+        search_view.setOnClickListener { presenter.searchPressed() }
+        text_search.setOnClickListener { presenter.searchPressed() }
     }
 
     private fun initRecyclerView() {
@@ -40,5 +45,11 @@ class HomeFragment : BaseFragment(), HomeView {
         list_categories.adapter =
             CategoriesAdapter(listCategories, activity as Context)
 
+    }
+
+    override fun gotoSearchScreen() {
+        parentFragment?.let {
+            (it as AppFragment).gotoScreen(SearchResultFragment())
+        }
     }
 }

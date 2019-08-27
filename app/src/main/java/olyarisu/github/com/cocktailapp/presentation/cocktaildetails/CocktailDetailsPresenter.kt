@@ -9,7 +9,8 @@ import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
 
 @InjectViewState
 class CocktailDetailsPresenter(
-    val model: CocktailsDetailsModel
+    val model: CocktailsDetailsModel,
+    val id: Int
 ) : BasePresenter<CocktailDetailsView>() {
 
     override fun attachView(view: CocktailDetailsView?) {
@@ -19,10 +20,10 @@ class CocktailDetailsPresenter(
 
     //TODO fix dispose()
     private fun loadCocktailDetails() =
-        model.getCocktailDetails(11006)
-            .doOnSubscribe { viewState.showProgressBar() }
+        model.getCocktailDetails(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { viewState.showProgressBar() }
             .doFinally { viewState.hideProgress() }
             .subscribe(
                 { cocktail -> showCocktailDetails(cocktail) },

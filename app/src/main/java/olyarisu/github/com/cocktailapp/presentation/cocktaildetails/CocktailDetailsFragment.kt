@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
+import olyarisu.github.com.cocktailapp.COCKTAIL_ID
 import org.koin.android.ext.android.get
-
+import org.koin.core.parameter.parametersOf
 
 
 class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
@@ -77,6 +78,7 @@ class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
 
     @ProvidePresenter
     fun providePresenter(): CocktailDetailsPresenter {
-        return get()
+        val id = arguments?.getInt(COCKTAIL_ID)
+        return get { parametersOf(id) }
     }
 }

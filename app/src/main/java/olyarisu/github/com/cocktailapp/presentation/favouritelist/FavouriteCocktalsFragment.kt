@@ -9,7 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import olyarisu.github.com.cocktailapp.R
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
-import olyarisu.github.com.cocktailapp.presentation.adapter.FavouritesCocktailsAdapter
+import olyarisu.github.com.cocktailapp.presentation.adapter.CocktailsAdapter
 
 
 class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
@@ -41,6 +41,6 @@ class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
             ))
         }
 
-        rv_favourites.adapter = FavouritesCocktailsAdapter(listCocktails, activity as Context)
+        rv_favourites.adapter = CocktailsAdapter(listCocktails, activity as Context)
     }
 }

@@ -12,8 +12,8 @@ import retrofit2.http.Query
 
 interface CocktailApi {
 
-    @GET("search.php?s={name}")
-    fun searchCocktailByName(@Path("name") name : String): Any
+    @GET("search.php")
+    fun searchCocktailByName(@Query ("s") searchText : String): Single<DrinkJson>
 
     @GET("search.php?i={name}")
     fun searchIngredientByName(@Path("name") name : String): Any

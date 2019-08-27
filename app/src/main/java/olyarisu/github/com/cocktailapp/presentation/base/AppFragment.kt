@@ -36,11 +36,16 @@ class AppFragment : BaseFragment() {
         }
     }
 
-    private fun gotoHomeTab() = gotoTab(HomeFragment())
-    private fun gotoFavouritesTab() = gotoTab(FavouriteCocktalsFragment())
-    private fun gotoShoppingList() = gotoTab(CocktailDetailsFragment())
+    private fun gotoHomeTab() = gotoScreen(HomeFragment())
+    private fun gotoFavouritesTab() = gotoScreen(FavouriteCocktalsFragment())
+    private fun gotoShoppingList() = gotoScreen(CocktailDetailsFragment())
 
-    private fun gotoTab(fragment: BaseFragment) {
-        childFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    fun gotoScreen(fragment: BaseFragment) {
+        childFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.fragment_container, fragment).commit()
+    }
+
+     fun gotoScreen(fragment: BaseFragment, bundle: Bundle) {
+        fragment.arguments = bundle
+        childFragmentManager.beginTransaction().addToBackStack(null).add(R.id.fragment_container, fragment).commit()
     }
 }
