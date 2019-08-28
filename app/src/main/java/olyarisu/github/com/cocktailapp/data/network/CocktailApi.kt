@@ -1,7 +1,10 @@
 package olyarisu.github.com.cocktailapp.data.network
 
 import io.reactivex.Single
-import olyarisu.github.com.cocktailapp.data.dto.DrinkJson
+import olyarisu.github.com.cocktailapp.data.dto.alcoholic.AlcoholicJson
+import olyarisu.github.com.cocktailapp.data.dto.category.CategoryJson
+import olyarisu.github.com.cocktailapp.data.dto.drink.DrinkJson
+import olyarisu.github.com.cocktailapp.data.dto.glass.GlassJson
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -42,27 +45,27 @@ interface CocktailApi {
     @GET("filter.php?i={ingredient}")
     fun searchCocktailByIngredients(@Path("ingredients") ingredients : String): Any
 
-    @GET("filter.php?a={alcoholic}")
-    fun getCocktailsListByAlcoholic(@Path("alcoholic") alcoholic : String): Any
+    @GET("filter.php")
+    fun getCocktailsListByAlcoholic(@Query("a") alcoholic : String): Single<DrinkJson>
 
-    @GET("filter.php?c={category}")
-    fun getCocktailsListByCategory(@Path("category") category : String): Any
+    @GET("filter.php")
+    fun getCocktailsListByCategory(@Query("c") category : String): Single<DrinkJson>
 
-    @GET("filter.php?g={glass}")
-    fun getCocktailsListByGlass(@Path("glass") glass : String): Any
+    @GET("filter.php")
+    fun getCocktailsListByGlass(@Query("g") glass : String): Single<DrinkJson>
 
     //Next 4 request should like config information on the beginning using appуу
     @GET("list.php?c=list")
-    fun getCategoriesList(): Any
+    fun getCategoriesList(): Single<CategoryJson>
 
     @GET("list.php?g=list")
-    fun getGlassessList(): Any
+    fun getGlassessList(): Single<GlassJson>
 
     @GET("list.php?i=list")
     fun getIngredientssList(): Any
 
     @GET("list.php?a=list")
-    fun getAlcoholicList(): Any
+    fun getAlcoholicList(): Single<AlcoholicJson>
 
 
     companion object Factory {

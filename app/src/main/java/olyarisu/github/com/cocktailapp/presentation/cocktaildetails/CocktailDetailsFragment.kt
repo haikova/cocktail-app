@@ -78,7 +78,8 @@ class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
 
     @ProvidePresenter
     fun providePresenter(): CocktailDetailsPresenter {
-        val id = arguments?.getInt(COCKTAIL_ID)
+        //TODO FIX IT
+        val id = arguments?.getInt(COCKTAIL_ID, 11006) ?: 11006
         return get { parametersOf(id) }
     }
 }

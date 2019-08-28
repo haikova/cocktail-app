@@ -30,7 +30,6 @@ class CocktailsAdapter(
     override fun onBindViewHolder(viewHolder: CocktailViewHolder, position: Int) {
         viewHolder.apply {
             titleCocktail.text = listCocktails[position].name
-            categoryCocktail.text = listCocktails[position].alcoholic
             Glide.with(context)
                 .load(listCocktails[position].photoURL)
                 .into(imageCocktail)
@@ -50,5 +49,4 @@ class CocktailsAdapter(
 class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val imageCocktail = itemView.image_cocktail
     val titleCocktail = itemView.title_cocktail
-    val categoryCocktail = itemView.category_cocktail
 }

@@ -11,8 +11,15 @@ import olyarisu.github.com.cocktailapp.presentation.adapter.CategoriesAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import olyarisu.github.com.cocktailapp.COCKTAIL_ID
+import olyarisu.github.com.cocktailapp.domain.entities.Category
+import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
+import olyarisu.github.com.cocktailapp.presentation.adapter.CocktailsAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.AppFragment
+import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
 import olyarisu.github.com.cocktailapp.presentation.search.SearchResultFragment
+import org.koin.android.ext.android.get
 
 
 class HomeFragment : BaseFragment(), HomeView {
@@ -25,31 +32,56 @@ class HomeFragment : BaseFragment(), HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView()
+        initCategoryRecyclerView()
+
         //TODO fix this
         search_view.setOnClickListener { presenter.searchPressed() }
         text_search.setOnClickListener { presenter.searchPressed() }
     }
 
-    private fun initRecyclerView() {
+    override fun showCategories(listCategory: List<Category>) {
+        (list_categories.adapter as CategoriesAdapter).add(listCategory)
+    }
+
+    override fun showCocktailList(cocktails: List<Cocktail>) {
+        list_cocktails.layoutManager = LinearLayoutManager(activity as Context)
+        list_cocktails.adapter =
+            CocktailsAdapter(cocktails as ArrayList<Cocktail>, activity as Context) {
+                gotoCocktailDetials(it.id)
+            }
+    }
+
+    override fun setCocktailsListTitle(title: String) {
+        title_cocktails_list.text = title
+    }
+
+    private fun gotoCocktailDetials(id: Int) {
+        val bundle = Bundle()
+        bundle.apply {
+            putInt(COCKTAIL_ID, id)
+        }
+        parentFragment?.let {
+            (it as AppFragment).gotoScreen(CocktailDetailsFragment(), bundle)
+        }
+    }
+
+    private fun initCategoryRecyclerView() {
         list_categories.layoutManager =
             LinearLayoutManager(activity as Context, LinearLayout.HORIZONTAL, false)
-
-        val listCategories = ArrayList<String>()
-        for (i in 1..10) {
-            listCategories.add("category $i")
-        }
-
-        LinearSnapHelper().attachToRecyclerView(list_categories)
-
         list_categories.adapter =
-            CategoriesAdapter(listCategories, activity as Context)
-
+            CategoriesAdapter(arrayListOf(), activity as Context) {
+                presenter.loadCocktailListByCategory(it)
+            }
     }
 
     override fun gotoSearchScreen() {
         parentFragment?.let {
             (it as AppFragment).gotoScreen(SearchResultFragment())
         }
+    }
+
+    @ProvidePresenter
+    fun providePresenter(): HomePresenter {
+        return get()
     }
 }

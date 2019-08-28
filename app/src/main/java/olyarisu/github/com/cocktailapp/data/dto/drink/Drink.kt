@@ -1,11 +1,11 @@
-package olyarisu.github.com.cocktailapp.data.dto
+package olyarisu.github.com.cocktailapp.data.dto.drink
 
 data class Drink(
-    val dateModified: String,
+    val dateModified: String?,
     val idDrink: String,
-    val strAlcoholic: String,
-    val strCategory: String,
-    val strCreativeCommonsConfirmed: String,
+    val strAlcoholic: String?,
+    val strCategory: String?,
+    val strCreativeCommonsConfirmed: String?,
     val strDrink: String,
     val strDrinkAlternate: Any?,
     val strDrinkDE: Any?,
@@ -14,8 +14,8 @@ data class Drink(
     val strDrinkThumb: String,
     val strDrinkZHHANS: Any?,
     val strDrinkZHHANT: Any?,
-    val strGlass: String,
-    val strIBA: String,
+    val strGlass: String?,
+    val strIBA: String?,
     val strIngredient1: String?,
     val strIngredient10: String?,
     val strIngredient11: String?,
@@ -52,6 +52,6 @@ data class Drink(
     val strMeasure7: String?,
     val strMeasure8: String?,
     val strMeasure9: String?,
-    val strTags: String,
+    val strTags: String?,
     val strVideo: Any?
 )

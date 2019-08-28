@@ -21,4 +21,8 @@ abstract  class BaseFragment: MvpAppCompatFragment(), BaseView {
         Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
         Log.e("COCKTAIL-APP", "error", throwable)
     }
+
+    open fun onBackPressed(): Boolean? {
+        return null
+    }
 }
