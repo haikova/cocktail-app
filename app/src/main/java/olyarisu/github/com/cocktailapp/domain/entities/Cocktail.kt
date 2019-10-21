@@ -1,10 +1,15 @@
 package olyarisu.github.com.cocktailapp.domain.entities
 
+import androidx.annotation.Keep
+import com.google.firebase.firestore.IgnoreExtraProperties
+
+@Keep
+@IgnoreExtraProperties
 data class Cocktail(
-        val id: Int,
-        val name: String,
-        val instruction: String?,
-        val ingredients: List<Ingredient>?,
+        val id: Int? = null,
+        val name: String? = null,
+        val instruction: String? = null,
+        val ingredients: List<Ingredient>? = null,
         val category: String? = null,
         val alcoholic: String? = null,
         val glass: String? = null,

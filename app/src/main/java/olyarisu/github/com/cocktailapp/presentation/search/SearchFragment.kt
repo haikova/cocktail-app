@@ -66,10 +66,12 @@ class SearchResultFragment : BaseFragment(),
             }
     }
 
-    private fun gotoCocktailDetials(id: Int) {
+    private fun gotoCocktailDetials(id: Int?) {
         val bundle = Bundle()
         bundle.apply {
-            putInt(COCKTAIL_ID, id)
+            if (id != null) {
+                putInt(COCKTAIL_ID, id)
+            }
         }
         parentFragment?.let {
             (it as AppFragment).gotoScreen(CocktailDetailsFragment(), bundle)

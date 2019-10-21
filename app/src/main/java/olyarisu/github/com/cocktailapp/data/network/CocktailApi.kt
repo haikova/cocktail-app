@@ -28,7 +28,7 @@ interface CocktailApi {
     fun getIngredient(@Path("id") idIngredient : Int): Any
 
     @GET("random.php")
-    fun getRandomCocktail(): Any
+    fun getRandomCocktail(): Single<DrinkJson>
 
     //PATREON
     @GET("popular.php")

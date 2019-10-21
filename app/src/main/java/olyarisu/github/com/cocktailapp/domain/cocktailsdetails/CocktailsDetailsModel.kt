@@ -5,4 +5,5 @@ import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 
 interface CocktailsDetailsModel {
     fun getCocktailDetails(id: Int): Single<Cocktail>
+    fun checkUserLogin()
 }

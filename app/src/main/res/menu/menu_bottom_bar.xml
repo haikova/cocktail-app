@@ -10,6 +10,6 @@
         android:icon="@drawable/ic_favorite_black_24dp"/>
     <item
         android:id="@+id/shopping_item"
-        android:title="@string/menu_shopping"
+        android:title="@string/menu_random"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"/>
 </menu>

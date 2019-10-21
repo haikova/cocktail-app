@@ -55,10 +55,20 @@ class HomeFragment : BaseFragment(), HomeView {
         title_cocktails_list.text = title
     }
 
-    private fun gotoCocktailDetials(id: Int) {
+    override fun showProgress(){
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress(){
+        progress_bar.visibility = View.GONE
+    }
+
+    private fun gotoCocktailDetials(id: Int?) {
         val bundle = Bundle()
         bundle.apply {
-            putInt(COCKTAIL_ID, id)
+            if (id != null) {
+                putInt(COCKTAIL_ID, id)
+            }
         }
         parentFragment?.let {
             (it as AppFragment).gotoScreen(CocktailDetailsFragment(), bundle)

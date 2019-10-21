@@ -9,4 +9,6 @@ interface HomeView : BaseView {
     fun showCategories(listCategory: List<Category>)
     fun showCocktailList(cocktails: List<Cocktail>)
     fun setCocktailsListTitle(title: String)
+    fun hideProgress()
+    fun showProgress()
 }

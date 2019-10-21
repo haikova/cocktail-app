@@ -5,9 +5,11 @@ import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_app.*
 import olyarisu.github.com.cocktailapp.R
+import olyarisu.github.com.cocktailapp.TempFragment
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
 import olyarisu.github.com.cocktailapp.presentation.favouritelist.FavouriteCocktalsFragment
 import olyarisu.github.com.cocktailapp.presentation.home.HomeFragment
+import olyarisu.github.com.cocktailapp.presentation.random.RandomFragment
 
 
 class AppFragment : BaseFragment() {
@@ -41,7 +43,7 @@ class AppFragment : BaseFragment() {
 
     private fun gotoHomeTab() = gotoTab(HomeFragment())
     private fun gotoFavouritesTab() = gotoTab(FavouriteCocktalsFragment())
-    private fun gotoShoppingList() = gotoTab(CocktailDetailsFragment())
+    private fun gotoShoppingList() = gotoTab(RandomFragment())
 
     fun gotoTab(fragment: BaseFragment) =
         childFragmentManager.beginTransaction().addToBackStack(null).replace(

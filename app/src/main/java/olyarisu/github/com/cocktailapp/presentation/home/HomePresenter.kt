@@ -21,14 +21,12 @@ class HomePresenter(
         viewState.gotoSearchScreen()
     }
 
-
-    //TOGO Progress bar
     fun loadCategories() =
         model.getCategories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-/*        .doOnSubscribe { viewState.showProgressBar() }
-        .doFinally { viewState.hideProgress() }*/
+        .doOnSubscribe { viewState.showProgress() }
+        .doFinally { viewState.hideProgress() }
             .subscribe(
                 { categories -> showCategories(categories) },
                 { error -> viewState.showError(error) })
@@ -37,8 +35,8 @@ class HomePresenter(
         model.getCocktailsListByCategory(category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-/*        .doOnSubscribe { viewState.showProgressBar() }
-        .doFinally { viewState.hideProgress() }*/
+        .doOnSubscribe { viewState.showProgress() }
+        .doFinally { viewState.hideProgress() }
             .subscribe(
                 { cocktails ->
                     viewState.showCocktailList(cocktails)

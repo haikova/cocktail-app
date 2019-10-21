@@ -11,6 +11,9 @@ import olyarisu.github.com.cocktailapp.data.dto.glass.GlassJson
 import olyarisu.github.com.cocktailapp.data.home.*
 import olyarisu.github.com.cocktailapp.data.mapper.Mapper
 import olyarisu.github.com.cocktailapp.data.network.NetworkService
+import olyarisu.github.com.cocktailapp.data.random.DefaultRandomRepository
+import olyarisu.github.com.cocktailapp.data.random.RandomDatasource
+import olyarisu.github.com.cocktailapp.data.random.RemoteRandomDatasource
 import olyarisu.github.com.cocktailapp.data.search.DefaultSearchResulRepository
 import olyarisu.github.com.cocktailapp.data.search.RemoteSearchResultDatasource
 import olyarisu.github.com.cocktailapp.data.search.SearchResultDatasource
@@ -23,11 +26,15 @@ import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.domain.home.DefaultHomeModel
 import olyarisu.github.com.cocktailapp.domain.home.HomeModel
 import olyarisu.github.com.cocktailapp.domain.home.HomeRepository
+import olyarisu.github.com.cocktailapp.domain.random.DefaultRandomModel
+import olyarisu.github.com.cocktailapp.domain.random.RandomModel
+import olyarisu.github.com.cocktailapp.domain.random.RandomRepository
 import olyarisu.github.com.cocktailapp.domain.search.DefaultSearchResultModel
 import olyarisu.github.com.cocktailapp.domain.search.SearchResultModel
 import olyarisu.github.com.cocktailapp.domain.search.SearchResultModelRepository
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsPresenter
 import olyarisu.github.com.cocktailapp.presentation.home.HomePresenter
+import olyarisu.github.com.cocktailapp.presentation.random.RandomPresenter
 import olyarisu.github.com.cocktailapp.presentation.search.SearchResultPresenter
 import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
@@ -76,4 +83,16 @@ val applicationModule = module {
     }
     single { RemoteSearchResultDatasource(get()) as SearchResultDatasource }
     single(qualifier = StringQualifier("search")) { SearhResultDataMapper() as Mapper<DrinkJson, List<Cocktail>> }
+
+    //Random cocktail
+    factory { RandomPresenter(get()) }
+    single { DefaultRandomModel(get()) as RandomModel }
+    single {
+        DefaultRandomRepository(
+            get(),
+            get(StringQualifier("random"))
+        ) as RandomRepository
+    }
+    single { RemoteRandomDatasource(get()) as RandomDatasource }
+    single(qualifier = StringQualifier("random")) { CocktailDetailsDataMapper() as Mapper<DrinkJson, Cocktail> }
 }
