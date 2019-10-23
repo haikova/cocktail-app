@@ -1,5 +1,7 @@
 package olyarisu.github.com.cocktailapp.di
 
+import android.content.Context
+import android.net.ConnectivityManager
 import olyarisu.github.com.cocktailapp.data.cocktaildetails.CocktailDetailsDataMapper
 import olyarisu.github.com.cocktailapp.data.cocktaildetails.CocktailDetailsDatasource
 import olyarisu.github.com.cocktailapp.data.cocktaildetails.DefaultCocktailDetailsRepository
@@ -36,12 +38,18 @@ import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDeta
 import olyarisu.github.com.cocktailapp.presentation.home.HomePresenter
 import olyarisu.github.com.cocktailapp.presentation.random.RandomPresenter
 import olyarisu.github.com.cocktailapp.presentation.search.SearchResultPresenter
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
 
 val applicationModule = module {
 
-    single { NetworkService() }
+    single {
+        NetworkService(
+            androidContext().cacheDir,
+            androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        )
+    }
 
     //Home
     factory { HomePresenter(get()) }
