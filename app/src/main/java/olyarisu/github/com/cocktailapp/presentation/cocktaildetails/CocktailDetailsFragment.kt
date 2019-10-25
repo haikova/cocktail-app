@@ -22,6 +22,7 @@ import org.koin.core.parameter.parametersOf
 
 class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
 
+
     @InjectPresenter
     lateinit var presenter: CocktailDetailsPresenter
 
@@ -82,6 +83,10 @@ class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
 
     override fun gotoLoginScreen(){
         (parentFragment as AppFragment).gotoScreen(LoginFragment())
+    }
+
+    override fun setFavButtonPressed() {
+        button_favorite.isChecked = true
     }
 
     @ProvidePresenter

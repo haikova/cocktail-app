@@ -1,10 +1,11 @@
 package olyarisu.github.com.cocktailapp.presentation.favouritelist
 
-import android.widget.Toast
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
+import olyarisu.github.com.cocktailapp.COCKTAIL_APP
+import olyarisu.github.com.cocktailapp.domain.entities.FavouriteList
 import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
 
 @InjectViewState
@@ -18,28 +19,26 @@ class FavouriteCocktalsPresenter : BasePresenter<FavouriteCocktalsView>() {
     private fun checkLogin() {
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.currentUser?.let {
-            checkFavouriteCocktails()
-        } ?: viewState.gotoLoginScreen()
-    }
-
-    private fun checkFavouriteCocktails() {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Favourites cocktails")
-            .get()
-            .addOnSuccessListener { result ->
-                if (result.isEmpty) {
-                    viewState.showTip()
-                } else {
-                    val listCocktails = mutableListOf<Cocktail>()
-                    for (document in result) {
-                        val cocktail = document.toObject(Cocktail::class.java)
-                        listCocktails.add(cocktail)
+            val uid = firebaseAuth.currentUser?.uid
+            uid?.let {
+                val db = FirebaseFirestore.getInstance()
+                db.collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            val favourites = document.toObject(FavouriteList::class.java)
+                            Log.d(COCKTAIL_APP, "DocumentSnapshot data: ${document.data}")
+                            Log.d(COCKTAIL_APP, favourites.toString())
+                            favourites?.let { it1 -> viewState.showFavouriteCocktails(it1) }
+                        } else {
+                            Log.d(COCKTAIL_APP, "No such document")
+                        }
                     }
-                    viewState.showFavouriteCocktails(listCocktails)
-                }
+                    .addOnFailureListener { exception ->
+                        Log.d(COCKTAIL_APP, "get failed with ", exception)
+                    }
             }
-            .addOnFailureListener { exception ->
-            }
-
+        } ?: viewState.gotoLoginScreen()
     }
 }

@@ -13,4 +13,5 @@ interface CocktailDetailsView : BaseView {
     fun setIngredients(ingredients: List<Ingredient>?)
     fun setPhoto(photoURL: String?)
     fun gotoLoginScreen()
+    fun setFavButtonPressed()
 }

@@ -12,7 +12,8 @@
         android:text="Your favourite cocktails"
         android:textStyle="bold"
         android:textColor="#000000"
-        android:textSize="26sp"/>
+        android:textSize="26sp"
+        android:layout_marginBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favourites"
