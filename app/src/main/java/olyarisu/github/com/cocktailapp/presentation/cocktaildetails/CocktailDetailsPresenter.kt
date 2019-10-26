@@ -76,7 +76,7 @@ class CocktailDetailsPresenter(
             val db = FirebaseFirestore.getInstance()
             db.collection("users")
                 .document(uid)
-                .update("favourites", FieldValue.arrayRemove(id.toString()))
+                .update("favourites", FieldValue.arrayRemove(model.getFavCocktailDetails()))
         }
     }
 

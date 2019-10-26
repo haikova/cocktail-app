@@ -1,6 +1,9 @@
 package olyarisu.github.com.cocktailapp.presentation.random
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
@@ -17,6 +20,50 @@ class RandomPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadCocktailDetails()
+    }
+
+    fun favouriteButtonPressed(isChecked: Boolean) {
+        if (checkUserLoginIn()) {
+            when (isChecked) {
+                true -> addToFavourites()
+                false -> removeFromFavourites()
+            }
+        } else {
+            viewState.gotoLoginScreen()
+        }
+    }
+
+    private fun checkUserLoginIn(): Boolean {
+        // TODO move to model
+        //model.checkUserLogin()
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.currentUser?.let {
+            return true
+        } ?: return false
+    }
+
+    private fun removeFromFavourites() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val uid = firebaseAuth.currentUser?.uid
+        uid?.let {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users")
+                .document(uid)
+                .update("favourites", FieldValue.arrayRemove(model.getFavCocktailDetails()))
+        }
+    }
+
+    private fun addToFavourites() {
+        // TODO move to model
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val uid = firebaseAuth.currentUser?.uid
+        uid?.let {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users")
+                .document(uid)
+                .update("favourites", FieldValue.arrayUnion(model.getFavCocktailDetails()))
+        }
     }
 
     //TODO fix dispose()

@@ -14,4 +14,5 @@ interface RandomView : BaseView{
     fun setPhoto(photoURL: String?)
     fun enableTryAgainButton()
     fun disableTryAgainButton()
+    fun gotoLoginScreen()
 }
