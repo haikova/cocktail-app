@@ -38,7 +38,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:src="@drawable/ic_search_black_24dp" />
+                android:src="@drawable/search" />
         </LinearLayout>
 
         <TextView

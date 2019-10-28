@@ -17,8 +17,7 @@
             android:id="@+id/image_cocktail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/drink" />
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
 
