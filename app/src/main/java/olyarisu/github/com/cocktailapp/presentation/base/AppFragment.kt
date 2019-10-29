@@ -1,12 +1,9 @@
 package olyarisu.github.com.cocktailapp.presentation.base
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_app.*
 import olyarisu.github.com.cocktailapp.R
-import olyarisu.github.com.cocktailapp.TempFragment
-import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
 import olyarisu.github.com.cocktailapp.presentation.favouritelist.FavouriteCocktalsFragment
 import olyarisu.github.com.cocktailapp.presentation.home.HomeFragment
 import olyarisu.github.com.cocktailapp.presentation.random.RandomFragment
@@ -45,8 +42,8 @@ class AppFragment : BaseFragment() {
     private fun gotoFavouritesTab() = gotoTab(FavouriteCocktalsFragment())
     private fun gotoShoppingList() = gotoTab(RandomFragment())
 
-    fun gotoTab(fragment: BaseFragment) =
-        childFragmentManager.beginTransaction().addToBackStack(null).replace(
+    private fun gotoTab(fragment: BaseFragment) =
+        childFragmentManager.beginTransaction().replace(
             R.id.fragment_container,
             fragment
         ).commit()
@@ -62,22 +59,17 @@ class AppFragment : BaseFragment() {
             .add(R.id.fragment_container, fragment).commit()
     }
 
-    private fun highlitTab(tabRes: Int) {
-        val menu = bottom_bar.menu
-        menu.getItem(tabRes).isChecked = true
-    }
-
-
-    //TODO fix back navigation https://medium.com/@smihajlovskih/create-instagram-like-backstack-4711600c5bff
     override fun onBackPressed(): Boolean? {
-        val count = childFragmentManager.backStackEntryCount
-        bottom_bar.selectedItemId
-
-        return if (count == 0) {
-            super.onBackPressed()
-        } else {
-            childFragmentManager.popBackStack()
-            true
+        return when {
+            childFragmentManager.backStackEntryCount != 0 -> {
+                childFragmentManager.popBackStack()
+                true
+            }
+            bottom_bar.selectedItemId != R.id.home_item -> {
+                bottom_bar.selectedItemId = R.id.home_item
+                true
+            }
+            else -> super.onBackPressed()
         }
     }
 }

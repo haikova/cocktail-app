@@ -22,7 +22,6 @@ class CocktailDetailsPresenter(
     override fun attachView(view: CocktailDetailsView?) {
         super.attachView(view)
         loadCocktailDetails()
-        checkInFavourites()
     }
 
     fun favouriteButtonPressed(isChecked: Boolean) {
@@ -101,7 +100,8 @@ class CocktailDetailsPresenter(
             .doOnSubscribe { viewState.showProgressBar() }
             .doFinally { viewState.hideProgress() }
             .subscribe(
-                { cocktail -> showCocktailDetails(cocktail) },
+                { cocktail -> showCocktailDetails(cocktail)
+                    checkInFavourites()},
                 { error -> viewState.showError(error) })
 
     private fun showCocktailDetails(cocktail: Cocktail) {
