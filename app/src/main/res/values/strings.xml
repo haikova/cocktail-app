@@ -3,4 +3,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_favourite">Favourite</string>
     <string name="menu_random">Random</string>
+
+    // Favourute Screen
+    <string name="favourite_title">Your favourite cocktails</string>
+    <string name="favourite_tip">Your favourites list is empty. You can add some using heart button</string>
 </resources>

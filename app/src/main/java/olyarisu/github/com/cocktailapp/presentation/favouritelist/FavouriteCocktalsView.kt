@@ -6,5 +6,7 @@ import olyarisu.github.com.cocktailapp.presentation.base.BaseView
 interface FavouriteCocktalsView : BaseView {
     fun gotoLoginScreen()
     fun showFavouriteCocktails(list: FavouriteList)
+    fun showProgress()
+    fun hideProgress()
     fun showTip()
 }
