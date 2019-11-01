@@ -5,7 +5,7 @@ import olyarisu.github.com.cocktailapp.data.mapper.Mapper
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.domain.entities.Ingredient
 
-class SearhResultDataMapper : Mapper<DrinkJson, List<Cocktail>> {
+class SearchResultDataMapper : Mapper<DrinkJson, List<Cocktail>> {
 
     override fun map(value: DrinkJson): List<Cocktail> {
         val cocktailList = arrayListOf<Cocktail>()

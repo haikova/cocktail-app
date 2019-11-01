@@ -9,7 +9,7 @@ import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
 
 @InjectViewState
 class HomePresenter(
-    val model: HomeModel
+    private val model: HomeModel
 ) : BasePresenter<HomeView>() {
 
     override fun attachView(view: HomeView?) {
@@ -21,30 +21,27 @@ class HomePresenter(
         viewState.gotoSearchScreen()
     }
 
-    fun loadCategories() =
+    private fun loadCategories() =
         model.getCategories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe { viewState.showProgress() }
-        .doFinally { viewState.hideProgress() }
+            .doOnSubscribe { viewState.showProgress() }
+            .doFinally { viewState.hideProgress() }
             .subscribe(
-                { categories -> showCategories(categories) },
+                { categories -> viewState.showCategories(categories) },
                 { error -> viewState.showError(error) })
 
     fun loadCocktailListByCategory(category: Category) =
         model.getCocktailsListByCategory(category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe { viewState.showProgress() }
-        .doFinally { viewState.hideProgress() }
+            .doOnSubscribe { viewState.showProgress() }
+            .doFinally { viewState.hideProgress() }
             .subscribe(
                 { cocktails ->
+                    viewState.hideTip()
                     viewState.showCocktailList(cocktails)
                     viewState.setCocktailsListTitle(category.name)
                 },
                 { error -> viewState.showError(error) })
-
-    private fun showCategories(categories: List<Category>) {
-        viewState.showCategories(categories)
-    }
 }

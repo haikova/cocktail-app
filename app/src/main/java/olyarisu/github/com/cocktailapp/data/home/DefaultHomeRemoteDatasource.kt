@@ -16,7 +16,7 @@ class DefaultHomeRemoteDatasource(
     override fun getCocktailListCategory(category: String): Single<DrinkJson> =
         networkService.getCocktailService().getCocktailsListByCategory(category)
 
-    override fun getCocktailListAlcholic(category: String): Single<DrinkJson> =
+    override fun getCocktailListAlcoholic(category: String): Single<DrinkJson> =
         networkService.getCocktailService().getCocktailsListByAlcoholic(category)
 
     override fun getAlcoholicCategories(): Single<AlcoholicJson> =

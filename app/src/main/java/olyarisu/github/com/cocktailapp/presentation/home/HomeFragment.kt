@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import olyarisu.github.com.cocktailapp.R
 import olyarisu.github.com.cocktailapp.presentation.adapter.CategoriesAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
-import androidx.recyclerview.widget.LinearSnapHelper
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import olyarisu.github.com.cocktailapp.COCKTAIL_ID
@@ -18,7 +17,7 @@ import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.presentation.adapter.CocktailsAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.AppFragment
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
-import olyarisu.github.com.cocktailapp.presentation.search.SearchResultFragment
+import olyarisu.github.com.cocktailapp.presentation.search.SearchFragment
 import org.koin.android.ext.android.get
 
 
@@ -33,8 +32,8 @@ class HomeFragment : BaseFragment(), HomeView {
         super.onViewCreated(view, savedInstanceState)
 
         initCategoryRecyclerView()
+        initCocktailRecyclerView()
 
-        //TODO fix this
         search_view.setOnClickListener { presenter.searchPressed() }
         text_search.setOnClickListener { presenter.searchPressed() }
     }
@@ -44,11 +43,11 @@ class HomeFragment : BaseFragment(), HomeView {
     }
 
     override fun showCocktailList(cocktails: List<Cocktail>) {
-        list_cocktails.layoutManager = LinearLayoutManager(activity as Context)
-        list_cocktails.adapter =
-            CocktailsAdapter(cocktails as ArrayList<Cocktail>, activity as Context) {
-                gotoCocktailDetials(it.id)
-            }
+        (list_cocktails.adapter as CocktailsAdapter).replace(cocktails)
+    }
+
+    override fun hideTip(){
+        text_tip.visibility = View.GONE
     }
 
     override fun setCocktailsListTitle(title: String) {
@@ -63,7 +62,7 @@ class HomeFragment : BaseFragment(), HomeView {
         progress_bar.visibility = View.GONE
     }
 
-    private fun gotoCocktailDetials(id: Int?) {
+    private fun gotoCocktailDetails(id: Int?) {
         val bundle = Bundle()
         bundle.apply {
             if (id != null) {
@@ -79,14 +78,22 @@ class HomeFragment : BaseFragment(), HomeView {
         list_categories.layoutManager =
             LinearLayoutManager(activity as Context, LinearLayout.HORIZONTAL, false)
         list_categories.adapter =
-            CategoriesAdapter(arrayListOf(), activity as Context) {
+            CategoriesAdapter(arrayListOf()) {
                 presenter.loadCocktailListByCategory(it)
+            }
+    }
+
+    private fun initCocktailRecyclerView() {
+        list_cocktails.layoutManager = LinearLayoutManager(activity as Context)
+        list_cocktails.adapter =
+            CocktailsAdapter(arrayListOf(), activity as Context) {
+                gotoCocktailDetails(it.id)
             }
     }
 
     override fun gotoSearchScreen() {
         parentFragment?.let {
-            (it as AppFragment).gotoScreen(SearchResultFragment())
+            (it as AppFragment).gotoScreen(SearchFragment())
         }
     }
 

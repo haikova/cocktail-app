@@ -20,10 +20,6 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.Secondary">
-        <item name="android:textColor">@color/black</item>
-    </style>
-
     <style name="Text.Tip">
         <item name="android:textSize">@dimen/text_tip</item>
         <item name="android:textColor">@color/gray</item>

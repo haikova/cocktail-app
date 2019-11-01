@@ -16,10 +16,10 @@ class DefaultHomeModel(
 
     override fun getCocktailsListByCategory(category: Category): Single<List<Cocktail>> =
         when (category.idCategoryGroup) {
-            ALCOHOLIC -> homeRepository.getCocktailListAlcholic(category.name)
+            ALCOHOLIC -> homeRepository.getCocktailListAlcoholic(category.name)
             GLASSES -> homeRepository.getCocktailListGlasses(category.name)
             CATEGORY -> homeRepository.getCocktailListCategory(category.name)
             //TODO Fix it
-            else -> homeRepository.getCocktailListAlcholic(category.name)
+            else -> homeRepository.getCocktailListAlcoholic(category.name)
         }
 }

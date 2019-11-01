@@ -2,10 +2,10 @@ package olyarisu.github.com.cocktailapp.data.search
 
 import olyarisu.github.com.cocktailapp.data.network.NetworkService
 
-class RemoteSearchResultDatasource(
+class RemoteSearchDatasource(
     private val networkService: NetworkService
-) : SearchResultDatasource {
+) : SearchDatasource {
 
-    override fun serchCockatails(searchText: String) =
+    override fun searchCocktails(searchText: String) =
         networkService.getCocktailService().searchCocktailByName(searchText)
 }

@@ -18,12 +18,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import olyarisu.github.com.cocktailapp.COCKTAIL_APP
-import olyarisu.github.com.cocktailapp.COCKTAIL_ID
 
 
 class LoginFragment : BaseFragment() {
 
-    private val RC_SIGN_IN = 13
+    private val rcSigIn = 13
     private lateinit var auth: FirebaseAuth
 
     override val layoutRes: Int = R.layout.fragment_login
@@ -47,8 +46,8 @@ class LoginFragment : BaseFragment() {
 
             val mGoogleSignInClient = GoogleSignIn.getClient(it, gso)
 
-            val signInIntent = mGoogleSignInClient.getSignInIntent()
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent, rcSigIn)
         }
     }
 
@@ -56,7 +55,7 @@ class LoginFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == rcSigIn) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -98,13 +97,13 @@ class LoginFragment : BaseFragment() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("Login", "signInWithCredential:failure", task.exception)
-                        Toast.makeText(it,"Auth Failed",Toast.LENGTH_LONG).show()
+                        Toast.makeText(it, "Auth Failed", Toast.LENGTH_LONG).show()
                     }
                 }
         }
     }
 
-    private fun checkUserInDB(user: FirebaseUser){
+    private fun checkUserInDB(user: FirebaseUser) {
         val db = FirebaseFirestore.getInstance()
 
         db.collection("users").document(user.uid).get()
@@ -123,7 +122,6 @@ class LoginFragment : BaseFragment() {
             .addOnFailureListener { exception ->
                 Log.d(COCKTAIL_APP, "get failed with ", exception)
             }
-
 
 
     }

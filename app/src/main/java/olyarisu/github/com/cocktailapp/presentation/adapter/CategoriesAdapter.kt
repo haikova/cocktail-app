@@ -1,10 +1,11 @@
 package olyarisu.github.com.cocktailapp.presentation.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
 import olyarisu.github.com.cocktailapp.ALCOHOLIC
@@ -12,12 +13,9 @@ import olyarisu.github.com.cocktailapp.CATEGORY
 import olyarisu.github.com.cocktailapp.GLASSES
 import olyarisu.github.com.cocktailapp.R
 import olyarisu.github.com.cocktailapp.domain.entities.Category
-import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 
 class CategoriesAdapter(
     private val categories: ArrayList<Category>,
-    //private var listCategories: List<String>,
-    private val context: Context,
     private val onItemClick: ((Category) -> Unit)? = null
 ) : RecyclerView.Adapter<CategoryViewHolder>() {
 
@@ -52,6 +50,6 @@ class CategoriesAdapter(
 }
 
 class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val titleCategory = itemView.title_category
-    val resCategory = itemView.image_category
+    val titleCategory: TextView = itemView.title_category
+    val resCategory: ImageView = itemView.image_category
 }

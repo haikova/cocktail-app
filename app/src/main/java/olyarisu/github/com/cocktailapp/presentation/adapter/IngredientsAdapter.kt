@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_ingredient.view.*
@@ -15,8 +17,7 @@ class IngredientsAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<IngredientViewHolder>() {
 
-    val PHOTO_INGREDIENT_BASE_URL = "https://www.thecocktaildb.com/images/ingredients/"
-    val PHOTO_INGREDIENT_END_URL = "-Small.png"
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         return IngredientViewHolder(
@@ -48,7 +49,10 @@ class IngredientsAdapter(
 }
 
 class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val titleIngredient = itemView.ingredient_name
-    val measureIngredient = itemView.ingredient_measure
-    val photoIngredient = itemView.ingredient_photo
+    val titleIngredient: TextView = itemView.ingredient_name
+    val measureIngredient: TextView = itemView.ingredient_measure
+    val photoIngredient: ImageView = itemView.ingredient_photo
 }
+
+private const val PHOTO_INGREDIENT_BASE_URL = "https://www.thecocktaildb.com/images/ingredients/"
+private const val PHOTO_INGREDIENT_END_URL = "-Small.png"

@@ -15,12 +15,11 @@ import olyarisu.github.com.cocktailapp.domain.entities.FavouriteList
 import olyarisu.github.com.cocktailapp.presentation.adapter.FavouriteCocktailAdapter
 import olyarisu.github.com.cocktailapp.presentation.base.AppFragment
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
-import olyarisu.github.com.cocktailapp.presentation.home.HomePresenter
 import olyarisu.github.com.cocktailapp.presentation.login.LoginFragment
 import org.koin.android.ext.android.get
 
 
-class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
+class FavouriteCocktailsFragment : BaseFragment(), FavouriteCocktailsView {
 
     override val layoutRes = R.layout.fragment_favourites
 
@@ -32,7 +31,7 @@ class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
     override fun showFavouriteCocktails(list: FavouriteList) {
         rv_favourites.layoutManager = LinearLayoutManager(activity as Context)
         rv_favourites.adapter = FavouriteCocktailAdapter(list, activity as Context) {
-            gotoCocktailDetials(it.id)
+            gotoCocktailDetails(it.id)
         }
     }
 
@@ -48,7 +47,7 @@ class FavouriteCocktalsFragment : BaseFragment(), FavouriteCocktalsView {
         progress_bar.visibility = View.GONE
     }
 
-    private fun gotoCocktailDetials(id: Int?) {
+    private fun gotoCocktailDetails(id: Int?) {
         val bundle = Bundle()
         bundle.apply {
             if (id != null) {

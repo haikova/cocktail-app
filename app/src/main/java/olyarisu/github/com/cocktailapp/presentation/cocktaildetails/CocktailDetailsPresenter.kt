@@ -15,7 +15,7 @@ import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
 
 @InjectViewState
 class CocktailDetailsPresenter(
-    val model: CocktailsDetailsModel,
+    private val model: CocktailsDetailsModel,
     val id: Int
 ) : BasePresenter<CocktailDetailsView>() {
 

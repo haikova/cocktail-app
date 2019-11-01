@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -16,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/search_view_bg"
-            android:clickable="true"
             android:orientation="horizontal"
             android:paddingStart="24dp"
             android:paddingEnd="24dp">
@@ -29,16 +29,18 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
-                android:hint="Search"
+                android:hint="@string/home_search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:lines="1" />
+                android:lines="1"
+                tools:ignore="Autofill" />
 
             <ImageView
                 android:id="@+id/button_search"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
                 android:scaleType="center"
                 android:src="@drawable/search" />
         </LinearLayout>
@@ -47,7 +49,7 @@
             android:id="@+id/list_search_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

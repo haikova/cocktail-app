@@ -23,17 +23,17 @@ import olyarisu.github.com.cocktailapp.presentation.base.AppFragment
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsFragment
 
 
-class SearchResultFragment : BaseFragment(),
-    SearchResultView {
+class SearchFragment : BaseFragment(),
+    SearchView {
     override val layoutRes: Int = R.layout.fragment_search_result
 
     @InjectPresenter
-    lateinit var presenter : SearchResultPresenter
+    lateinit var presenter : SearchPresenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initResyclerView()
+        initRecyclerView()
         text_search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -45,14 +45,14 @@ class SearchResultFragment : BaseFragment(),
         })
         button_search.setOnClickListener { presenter.searchPressed(text_search.text.toString()) }
         text_search.requestFocus()
-        showKeybard()
+        showKeyboard()
     }
 
     override fun showSearchResult(searchResult: List<Cocktail>){
         (list_search_result.adapter as CocktailsAdapter).replace(searchResult)
     }
 
-    private fun initResyclerView(){
+    private fun initRecyclerView(){
         list_search_result.layoutManager = LinearLayoutManager(activity as Context)
         list_search_result.addItemDecoration(
             DividerItemDecoration(
@@ -62,11 +62,11 @@ class SearchResultFragment : BaseFragment(),
         )
         list_search_result.adapter =
             CocktailsAdapter(arrayListOf(), activity as Context) {
-                gotoCocktailDetials(it.id)
+                gotoCocktailDetails(it.id)
             }
     }
 
-    private fun gotoCocktailDetials(id: Int?) {
+    private fun gotoCocktailDetails(id: Int?) {
         val bundle = Bundle()
         bundle.apply {
             if (id != null) {
@@ -86,7 +86,7 @@ class SearchResultFragment : BaseFragment(),
         progress_bar.visibility = View.GONE
     }
 
-    private fun showKeybard(){
+    private fun showKeyboard(){
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(text_search, InputMethodManager.SHOW_IMPLICIT)
     }
@@ -96,7 +96,7 @@ class SearchResultFragment : BaseFragment(),
     }
 
     @ProvidePresenter
-    fun providePresenter(): SearchResultPresenter {
+    fun providePresenter(): SearchPresenter {
         return get()
     }
 

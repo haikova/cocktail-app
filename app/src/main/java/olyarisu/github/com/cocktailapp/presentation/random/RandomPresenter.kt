@@ -9,13 +9,11 @@ import io.reactivex.schedulers.Schedulers
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import olyarisu.github.com.cocktailapp.domain.random.RandomModel
 import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
-import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsView
 
 @InjectViewState
 class RandomPresenter(
-    val model: RandomModel
+    private val model: RandomModel
 ) : BasePresenter<RandomView>() {
-
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

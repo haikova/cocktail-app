@@ -20,10 +20,10 @@ import olyarisu.github.com.cocktailapp.data.network.NetworkService
 import olyarisu.github.com.cocktailapp.data.random.DefaultRandomRepository
 import olyarisu.github.com.cocktailapp.data.random.RandomDatasource
 import olyarisu.github.com.cocktailapp.data.random.RemoteRandomDatasource
-import olyarisu.github.com.cocktailapp.data.search.DefaultSearchResulRepository
-import olyarisu.github.com.cocktailapp.data.search.RemoteSearchResultDatasource
-import olyarisu.github.com.cocktailapp.data.search.SearchResultDatasource
-import olyarisu.github.com.cocktailapp.data.search.SearhResultDataMapper
+import olyarisu.github.com.cocktailapp.data.search.DefaultSearchRepository
+import olyarisu.github.com.cocktailapp.data.search.RemoteSearchDatasource
+import olyarisu.github.com.cocktailapp.data.search.SearchDatasource
+import olyarisu.github.com.cocktailapp.data.search.SearchResultDataMapper
 import olyarisu.github.com.cocktailapp.domain.cocktailsdetails.CocktailDetailsRepository
 import olyarisu.github.com.cocktailapp.domain.cocktailsdetails.CocktailsDetailsModel
 import olyarisu.github.com.cocktailapp.domain.cocktailsdetails.DefaultCocktailsDetailsModel
@@ -39,14 +39,14 @@ import olyarisu.github.com.cocktailapp.domain.login.AuthRepository
 import olyarisu.github.com.cocktailapp.domain.random.DefaultRandomModel
 import olyarisu.github.com.cocktailapp.domain.random.RandomModel
 import olyarisu.github.com.cocktailapp.domain.random.RandomRepository
-import olyarisu.github.com.cocktailapp.domain.search.DefaultSearchResultModel
-import olyarisu.github.com.cocktailapp.domain.search.SearchResultModel
-import olyarisu.github.com.cocktailapp.domain.search.SearchResultModelRepository
+import olyarisu.github.com.cocktailapp.domain.search.DefaultSearchModel
+import olyarisu.github.com.cocktailapp.domain.search.SearchModel
+import olyarisu.github.com.cocktailapp.domain.search.SearchRepository
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsPresenter
 import olyarisu.github.com.cocktailapp.presentation.favouritelist.FavouriteCocktailsPresenter
 import olyarisu.github.com.cocktailapp.presentation.home.HomePresenter
 import olyarisu.github.com.cocktailapp.presentation.random.RandomPresenter
-import olyarisu.github.com.cocktailapp.presentation.search.SearchResultPresenter
+import olyarisu.github.com.cocktailapp.presentation.search.SearchPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
@@ -73,7 +73,7 @@ val applicationModule = module {
         ) as HomeRepository
     }
     single { DefaultHomeRemoteDatasource(get()) as HomeRemoteDatasource }
-    single(qualifier = StringQualifier("alcoholic")) { AlcholicDataMapper() as Mapper<AlcoholicJson, List<Category>> }
+    single(qualifier = StringQualifier("alcoholic")) { AlcoholicDataMapper() as Mapper<AlcoholicJson, List<Category>> }
     single(qualifier = StringQualifier("category")) { CategoryDataMapper() as Mapper<CategoryJson, List<Category>> }
     single(qualifier = StringQualifier("glass")) { GlassDataMapper() as Mapper<GlassJson, List<Category>> }
 
@@ -90,16 +90,16 @@ val applicationModule = module {
     single(qualifier = StringQualifier("details")) { CocktailDetailsDataMapper() as Mapper<DrinkJson, Cocktail> }
 
     //Search
-    factory { SearchResultPresenter(get()) }
-    single { DefaultSearchResultModel(get()) as SearchResultModel }
+    factory { SearchPresenter(get()) }
+    single { DefaultSearchModel(get()) as SearchModel }
     single {
-        DefaultSearchResulRepository(
+        DefaultSearchRepository(
             get(),
             get(StringQualifier("search"))
-        ) as SearchResultModelRepository
+        ) as SearchRepository
     }
-    single { RemoteSearchResultDatasource(get()) as SearchResultDatasource }
-    single(qualifier = StringQualifier("search")) { SearhResultDataMapper() as Mapper<DrinkJson, List<Cocktail>> }
+    single { RemoteSearchDatasource(get()) as SearchDatasource }
+    single(qualifier = StringQualifier("search")) { SearchResultDataMapper() as Mapper<DrinkJson, List<Cocktail>> }
 
     //Random cocktail
     factory { RandomPresenter(get()) }

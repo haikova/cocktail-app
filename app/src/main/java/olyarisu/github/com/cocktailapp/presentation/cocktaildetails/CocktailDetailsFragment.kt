@@ -31,13 +31,13 @@ class CocktailDetailsFragment : BaseFragment(), CocktailDetailsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initResyclerView()
+        initRecyclerView()
         button_favorite.setOnCheckedChangeListener { _, isChecked ->
             presenter.favouriteButtonPressed(isChecked)
         }
     }
 
-    private fun initResyclerView(){
+    private fun initRecyclerView(){
         list_ingredients.layoutManager = LinearLayoutManager(activity as Context)
         list_ingredients.addItemDecoration(
             DividerItemDecoration(

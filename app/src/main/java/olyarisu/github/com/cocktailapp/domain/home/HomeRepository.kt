@@ -7,7 +7,7 @@ import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 
 interface HomeRepository {
     fun getCategories(): Observable<List<Category>>
-    fun getCocktailListAlcholic(category: String): Single<List<Cocktail>>
+    fun getCocktailListAlcoholic(category: String): Single<List<Cocktail>>
     fun getCocktailListCategory(category: String): Single<List<Cocktail>>
     fun getCocktailListGlasses(category: String): Single<List<Cocktail>>
 }

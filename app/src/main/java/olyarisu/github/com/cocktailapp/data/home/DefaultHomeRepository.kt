@@ -13,14 +13,14 @@ import olyarisu.github.com.cocktailapp.domain.home.HomeRepository
 
 class DefaultHomeRepository(
     private val homeRemoteDatasource: HomeRemoteDatasource,
-    private val alcholicDataMapper: Mapper<AlcoholicJson, List<Category>>,
+    private val alcoholicDataMapper: Mapper<AlcoholicJson, List<Category>>,
     private val categoryDataMapper: Mapper<CategoryJson, List<Category>>,
     private val glassDataMapper: Mapper<GlassJson, List<Category>>,
     private val cocktailDataMapper: Mapper<DrinkJson, List<Cocktail>>
 ) : HomeRepository {
 
-    override fun getCocktailListAlcholic(category: String): Single<List<Cocktail>> =
-        homeRemoteDatasource.getCocktailListAlcholic(category).flatMap {
+    override fun getCocktailListAlcoholic(category: String): Single<List<Cocktail>> =
+        homeRemoteDatasource.getCocktailListAlcoholic(category).flatMap {
             Single.just(
                 cocktailDataMapper.map(it)
             )
@@ -38,8 +38,6 @@ class DefaultHomeRepository(
             )
         }
 
-/*    override fun getCategories(): Single<List<Category>> = getAlcoholicCategories()*/
-
     override fun getCategories(): Observable<List<Category>> =
         Observable.merge(
             getAlcoholicCategories().toObservable(),
@@ -50,7 +48,7 @@ class DefaultHomeRepository(
     private fun getAlcoholicCategories(): Single<List<Category>> =
         homeRemoteDatasource.getAlcoholicCategories().flatMap {
             Single.just(
-                alcholicDataMapper.map(it)
+                alcoholicDataMapper.map(it)
             )
         }
 

@@ -11,4 +11,5 @@ interface HomeView : BaseView {
     fun setCocktailsListTitle(title: String)
     fun hideProgress()
     fun showProgress()
+    fun hideTip()
 }

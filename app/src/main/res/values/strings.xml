@@ -4,7 +4,15 @@
     <string name="menu_favourite">Favourite</string>
     <string name="menu_random">Random</string>
 
-    // Favourute Screen
+    // Favourite Screen
     <string name="favourite_title">Your favourite cocktails</string>
     <string name="favourite_tip">Your favourites list is empty. You can add some using heart button</string>
+
+    //Home
+    <string name="home_search">Search</string>
+    <string name="home_category">Category</string>
+    <string name="home_tip">Select category</string>
+
+    //Random
+    <string name="random_button">Try again</string>
 </resources>

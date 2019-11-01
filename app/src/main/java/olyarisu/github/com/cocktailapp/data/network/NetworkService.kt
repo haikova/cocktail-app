@@ -14,7 +14,7 @@ class NetworkService(
     private val connectivityManager: ConnectivityManager
 ) {
 
-    private val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
+    private val baseURL = "https://www.thecocktaildb.com/api/json/v1/1/"
     private val cacheSize = (5 * 1024 * 1024).toLong()
     private val myCache = Cache(
         cacheDir,
@@ -42,7 +42,7 @@ class NetworkService(
         .build()
 
     private fun getRetrofitInstance() = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(baseURL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpClient)

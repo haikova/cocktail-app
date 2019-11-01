@@ -8,7 +8,7 @@ import olyarisu.github.com.cocktailapp.data.dto.glass.GlassJson
 
 interface HomeRemoteDatasource {
     fun getAlcoholicCategories(): Single<AlcoholicJson>
-    fun getCocktailListAlcholic(category: String): Single<DrinkJson>
+    fun getCocktailListAlcoholic(category: String): Single<DrinkJson>
     fun getCocktailListCategory(category: String): Single<DrinkJson>
     fun getCocktailListGlasses(category: String): Single<DrinkJson>
     fun getGlassCategories(): Single<GlassJson>

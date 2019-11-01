@@ -1,8 +1,8 @@
 package olyarisu.github.com.cocktailapp.domain.entities
 
-import olyarisu.github.com.cocktailapp.CockailCategory
+import olyarisu.github.com.cocktailapp.CocktailCategory
 
 data class Category (
-    val idCategoryGroup: @CockailCategory Int,
+    val idCategoryGroup: @CocktailCategory Int,
     val name: String
 )

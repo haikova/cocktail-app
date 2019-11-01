@@ -11,9 +11,9 @@ import olyarisu.github.com.cocktailapp.presentation.base.BasePresenter
 @InjectViewState
 class FavouriteCocktailsPresenter(
     private val model: FavouriteModel
-) : BasePresenter<FavouriteCocktalsView>() {
+) : BasePresenter<FavouriteCocktailsView>() {
 
-    override fun attachView(view: FavouriteCocktalsView?) {
+    override fun attachView(view: FavouriteCocktailsView?) {
         super.attachView(view)
         loadFavouriteCocktails()
     }

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import olyarisu.github.com.cocktailapp.domain.entities.Cocktail
 import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_cocktail.view.*
 import olyarisu.github.com.cocktailapp.R
@@ -47,6 +49,6 @@ class CocktailsAdapter(
 }
 
 class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val imageCocktail = itemView.image_cocktail
-    val titleCocktail = itemView.title_cocktail
+    val imageCocktail: ImageView = itemView.image_cocktail
+    val titleCocktail: TextView = itemView.title_cocktail
 }

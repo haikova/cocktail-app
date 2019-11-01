@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_cocktail_details.*
 import kotlinx.android.synthetic.main.fragment_random.*
 import kotlinx.android.synthetic.main.fragment_random.button_favorite
 import kotlinx.android.synthetic.main.fragment_random.category_cocktail
@@ -26,7 +25,7 @@ import olyarisu.github.com.cocktailapp.presentation.base.BaseFragment
 import olyarisu.github.com.cocktailapp.presentation.login.LoginFragment
 import org.koin.android.ext.android.get
 
-class RandomFragment: BaseFragment(), RandomView {
+class RandomFragment : BaseFragment(), RandomView {
 
     @InjectPresenter
     lateinit var presenter: RandomPresenter
@@ -36,14 +35,14 @@ class RandomFragment: BaseFragment(), RandomView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initResyclerView()
+        initRecyclerView()
         button_tryagain.setOnClickListener { presenter.loadCocktailDetails() }
         button_favorite.setOnCheckedChangeListener { _, isChecked ->
             presenter.favouriteButtonPressed(isChecked)
         }
     }
 
-    private fun initResyclerView(){
+    private fun initRecyclerView() {
         list_ingredients.layoutManager = LinearLayoutManager(activity as Context)
         list_ingredients.addItemDecoration(
             DividerItemDecoration(
@@ -60,6 +59,7 @@ class RandomFragment: BaseFragment(), RandomView {
     override fun setInstruction(instruction: String?) {
         description_cocktail.text = instruction
     }
+
     override fun setCategory(category: String) {
         category_cocktail.text = category
     }
@@ -87,17 +87,15 @@ class RandomFragment: BaseFragment(), RandomView {
         progress_bar.visibility = View.GONE
     }
 
-    override fun enableTryAgainButton(){
-        //button_tryagain.isClickable = true
+    override fun enableTryAgainButton() {
         button_tryagain.visibility = View.VISIBLE
     }
 
-    override fun disableTryAgainButton(){
-        //button_tryagain.isClickable = false
+    override fun disableTryAgainButton() {
         button_tryagain.visibility = View.GONE
     }
 
-    override fun gotoLoginScreen(){
+    override fun gotoLoginScreen() {
         (parentFragment as AppFragment).gotoScreen(LoginFragment())
     }
 
