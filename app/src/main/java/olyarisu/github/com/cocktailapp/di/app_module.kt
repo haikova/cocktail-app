@@ -36,6 +36,8 @@ import olyarisu.github.com.cocktailapp.domain.home.DefaultHomeModel
 import olyarisu.github.com.cocktailapp.domain.home.HomeModel
 import olyarisu.github.com.cocktailapp.domain.home.HomeRepository
 import olyarisu.github.com.cocktailapp.domain.login.AuthRepository
+import olyarisu.github.com.cocktailapp.domain.login.DefaultLoginModel
+import olyarisu.github.com.cocktailapp.domain.login.LoginModel
 import olyarisu.github.com.cocktailapp.domain.random.DefaultRandomModel
 import olyarisu.github.com.cocktailapp.domain.random.RandomModel
 import olyarisu.github.com.cocktailapp.domain.random.RandomRepository
@@ -45,6 +47,7 @@ import olyarisu.github.com.cocktailapp.domain.search.SearchRepository
 import olyarisu.github.com.cocktailapp.presentation.cocktaildetails.CocktailDetailsPresenter
 import olyarisu.github.com.cocktailapp.presentation.favouritelist.FavouriteCocktailsPresenter
 import olyarisu.github.com.cocktailapp.presentation.home.HomePresenter
+import olyarisu.github.com.cocktailapp.presentation.login.LoginPresenter
 import olyarisu.github.com.cocktailapp.presentation.random.RandomPresenter
 import olyarisu.github.com.cocktailapp.presentation.search.SearchPresenter
 import org.koin.android.ext.koin.androidContext
@@ -118,4 +121,8 @@ val applicationModule = module {
     single {DefaultFavouriteModel(get(), get()) as FavouriteModel }
     single {FirebaseAuthRepository(FirebaseAuth.getInstance()) as AuthRepository}
     single { FirestoreRepository(FirebaseFirestore.getInstance()) as DatabaseRepository }
+
+    //Login
+    factory { LoginPresenter(get()) }
+    single {DefaultLoginModel(get()) as LoginModel }
 }
